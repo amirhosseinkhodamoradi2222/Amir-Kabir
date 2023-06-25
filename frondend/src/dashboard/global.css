@@ -1,0 +1,7 @@
+@font-face {
+    font-family: light;
+    src: url('../fonts/IRANSans-Light-web.ttf');
+}
+*{
+    font-family: light !important;
+}

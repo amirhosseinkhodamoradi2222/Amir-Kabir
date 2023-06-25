@@ -1,0 +1,9 @@
+add UI
+api js
+mehram
+کار داشبورد در حال اتمام است
+
+
+get cat:   http://localhost:5000/admin/getCat get
+set cat:  http://localhost:5000/admin/setCat post
+register: http://localhost:5000/user/register post

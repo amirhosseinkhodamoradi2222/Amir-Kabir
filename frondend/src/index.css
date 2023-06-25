@@ -1,0 +1,53 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  background-color: #f2f4f8 !important;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #a4a4a4;
+   border-radius: 20px;
+}
+
+@font-face {
+  font-family: bold;
+  src: url("./fonts/IRANSans-Bold-web.ttf");
+}
+@font-face {
+  font-family: light;
+  src: url("./fonts/IRANSans-Light-web.ttf");
+}
+@font-face {
+  font-family: medium;
+  src: url("./fonts/IRANSans-Medium-web.ttf");
+}
+@font-face {
+  font-family: UltraLight;
+  src: url("./fonts/IRANSans-UltraLight-web.ttf");
+}
+@font-face {
+  font-family: web;
+  src: url("./fonts/IRANSans-web.ttf");
+}
+
+/* کد رنگ نارنجی
+#FFA000  */
+/* کد رنگ طوسی 
+#9E9E9E */
