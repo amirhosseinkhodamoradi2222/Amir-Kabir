@@ -63,8 +63,8 @@ export default function Settings_dashbord() {
             <Table responsive striped bordered hover size="sm">
       <thead>
         <tr>
-          <th>#</th>
-          <th>First Name</th>
+          <th>تعداد دسته بندی ها</th>
+          <th>نام دسته ها</th>
         </tr>
       </thead>
       <tbody>

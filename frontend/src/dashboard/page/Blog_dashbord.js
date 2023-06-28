@@ -70,8 +70,8 @@ export default function Blog_dashbord() {
             <Card.Title className="text-center font-bold text-5xl"> {lighnt} </Card.Title>
         </Card>
               </div>
-          <div className="mt-5 lg:w-10/12">
-          <Table striped bordered hover responsive>
+          <div className="mt-5 lg:w-full">
+          <Table striped bordered hover responsive className="mx-4">
           <thead>
             <tr className="font-light">
               <th>id</th>

@@ -18,6 +18,7 @@ function Store() {
     setProduct(data)
     console.log(data);
   }
+  
 
 
   useEffect(()=>{
@@ -125,13 +126,13 @@ function Store() {
                 <div className="grid gap-4 p-3 md:grid-rows-1 md:grid-cols-2 grid-rows-1 grid-cols-1 lg:grid-rows-1 lg:grid-cols-4">
                 {product.map((item)=>(
                   <Link to={item._id} className="no-underline">
-                    <div className="border hover:shadow-sm  rounded ">
-                      <img src={`http://localhost:5000/uploads/prodec/thumbnails/${item.thumbnail}`} className="px-3"  />
+                    <div className="border hover:shadow-sm  rounded  ">
+                      <img src={`http://localhost:5000/uploads/prodec/thumbnails/${item.thumbnail}`} className="px-0 rounded-t-md w-full h-28"  />
                       <div className="mt-1 px-2 py-3">
-                        <p className="font-light text-[#57606f] opacity-90 text-[13px] text-center">
+                        <p className=" text-[#57606f] opacity-90 text-md font-bold text-right">
                             {item.title}
                         </p>
-                        <div className="text-blue-900 opacity-90  text-center">
+                        <div className="text-blue-900 opacity-90 pb-4 text-center">
                           <span className="mr-2 text-2xl font-bold">{item.price}</span>
                           <span className="font-light text-md mr-1">تومان</span>
                         </div>

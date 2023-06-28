@@ -12,7 +12,7 @@ export default function Sidebar_dashbord() {
   };
 
   return (
-    <div className={isOpen ? 'bg-gray-800 text-white relative h-[200vh] w-20 py-4 px-6 flex flex-col' : 'bg-gray-800 text-white relative h-[200vh] w-55 py-4 px-6 flex flex-col'}>
+    <div className={isOpen ? 'bg-gray-800 text-white relative h-[200vh] w-20 py-4 px-6 flex flex-col' : 'bg-gray-800 text-white relative h-[200vh] w-56 py-4 px-6 flex flex-col'}>
       <div className="text-xl font-bold mb-5 flex justify-between items-center">
         <span className={isOpen ? 'font-light text-sm pr-0' : 'font-light text-lg'}>داشبورد</span>
         <button
