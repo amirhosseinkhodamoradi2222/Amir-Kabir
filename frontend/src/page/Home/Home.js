@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import {Link} from 'react-router-dom'
 import Footer from "../../components/Footer/Footer";
 import Navbars from "../../components/Nanbar/Navbars";
@@ -6,9 +6,33 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import '../../../node_modules/swiper/modules/navigation/navigation.min.css';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import imgSlider from '../../img/2.webp'
-import product1 from "../../img/product3.webp";
+import axios from "axios";
+
+
 
 export default function Home() {
+  const [product,setProduct] = useState([])
+  const [data,setData] = useState([])
+  
+
+  const getProduct = async () => {
+    const res = await axios.get('http://localhost:5000/user/products')
+    const data = await res.data.post
+    setProduct(data)
+  }
+  const blogs = async () => {
+    const res = await axios.get('http://localhost:5000/admin/getblog')
+    const data = await res.data.blog
+    setData(data)
+  }
+  
+  
+  useEffect(()=>{
+    getProduct()
+    blogs()
+  },[])
+
+
 
   return (
     <>
@@ -34,7 +58,7 @@ export default function Home() {
       </SwiperSlide>
     </Swiper>
     </div>
-    <h1 className="my-4 text-2xl font-bold">دسته بندی محصولات هلدینگ تخصصی الکتروتکنیک و کامپیوتر</h1>
+    <h1 className="my-4 lg:text-2xl md:text-xl text-lg font-bold">دسته بندی محصولات الکتروتکنیک و کامپیوتر</h1>
     <div className="flex gap-4 mx-4">
       <div className="w-full h-20 bg-orange-600 rounded shadow-sm"></div>
       <div className="w-full h-20 bg-green-600 rounded shadow-sm"></div>
@@ -44,6 +68,9 @@ export default function Home() {
     <h2 className="mr-4 mt-2">محصولات ما</h2>
     <Swiper
     breakpoints={{
+      300: {
+        slidesPerView:2
+      },
       560: {
         slidesPerView:2
       },
@@ -54,7 +81,7 @@ export default function Home() {
         slidesPerView: 6,
       },
       1024 :{
-        slidesPerView: 8,
+        slidesPerView: 6,
       }
     }}
     modules={[Navigation]}
@@ -64,182 +91,28 @@ export default function Home() {
       pagination={{ clickable: true }}
       scrollbar={{ draggable: true }}
     >
-      <SwiperSlide>
-      <Link className="no-underline">
-                    <div className="border w-40 hover:shadow-sm rounded ">
-                      <img src={product1} className="px-1" />
+      {
+        product.map((item)=>(
+             <SwiperSlide>
+      <Link to={`/store/${item._id}`} className="no-underline">
+                    <div className="border w-40 hover:shadow-sm h-72 rounded ">
+                      {/* <img src={product1} className="px-1" /> */}
+                      <img src={`http://localhost:5000/uploads/prodec/thumbnails/${item.thumbnail}`} className="px-0 rounded-t h-36"  />
                       <div className="mt-1 px-2 py-3">
                         <p className="font-light text-[#57606f] opacity-90 text-[13px] text-center">
-                          تلویزیون ال ای دی تی سی ال مدل 32D3000i سایز 32 اینچ
+                            {item.title}
                         </p>
                         <div className="text-blue-900 opacity-90  text-center">
-                          <span className="mr-2 text-2xl font-bold">12000</span>
+                          <span className="mr-2 text-xl font-bold">{item.price}</span>
                           <span className="font-light text-md mr-1">تومان</span>
                         </div>
                       </div>
                     </div>
                   </Link>
       </SwiperSlide>
-      <SwiperSlide>
-      <Link className="no-underline">
-                    <div className="border w-40 hover:shadow-sm rounded ">
-                      <img src={product1} className="px-1" />
-                      <div className="mt-1 px-2 py-3">
-                        <p className="font-light text-[#57606f] opacity-90 text-[13px] text-center">
-                          تلویزیون ال ای دی تی سی ال مدل 32D3000i سایز 32 اینچ
-                        </p>
-                        <div className="text-blue-900 opacity-90  text-center">
-                          <span className="mr-2 text-2xl font-bold">12000</span>
-                          <span className="font-light text-md mr-1">تومان</span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-      </SwiperSlide>
-      <SwiperSlide>
-      <Link className="no-underline">
-                    <div className="border w-40 hover:shadow-sm rounded ">
-                      <img src={product1} className="px-1" />
-                      <div className="mt-1 px-2 py-3">
-                        <p className="font-light text-[#57606f] opacity-90 text-[13px] text-center">
-                          تلویزیون ال ای دی تی سی ال مدل 32D3000i سایز 32 اینچ
-                        </p>
-                        <div className="text-blue-900 opacity-90  text-center">
-                          <span className="mr-2 text-2xl font-bold">12000</span>
-                          <span className="font-light text-md mr-1">تومان</span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-      </SwiperSlide>
-      <SwiperSlide>
-      <Link className="no-underline">
-                    <div className="border w-40 hover:shadow-sm rounded ">
-                      <img src={product1} className="px-1" />
-                      <div className="mt-1 px-2 py-3">
-                        <p className="font-light text-[#57606f] opacity-90 text-[13px] text-center">
-                          تلویزیون ال ای دی تی سی ال مدل 32D3000i سایز 32 اینچ
-                        </p>
-                        <div className="text-blue-900 opacity-90  text-center">
-                          <span className="mr-2 text-2xl font-bold">12000</span>
-                          <span className="font-light text-md mr-1">تومان</span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-      </SwiperSlide>
-      <SwiperSlide>
-      <Link className="no-underline">
-                    <div className="border w-40 hover:shadow-sm rounded ">
-                      <img src={product1} className="px-1" />
-                      <div className="mt-1 px-2 py-3">
-                        <p className="font-light text-[#57606f] opacity-90 text-[13px] text-center">
-                          تلویزیون ال ای دی تی سی ال مدل 32D3000i سایز 32 اینچ
-                        </p>
-                        <div className="text-blue-900 opacity-90  text-center">
-                          <span className="mr-2 text-2xl font-bold">12000</span>
-                          <span className="font-light text-md mr-1">تومان</span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-      </SwiperSlide>
-      <SwiperSlide>
-      <Link className="no-underline">
-                    <div className="border w-40 hover:shadow-sm rounded ">
-                      <img src={product1} className="px-1" />
-                      <div className="mt-1 px-2 py-3">
-                        <p className="font-light text-[#57606f] opacity-90 text-[13px] text-center">
-                          تلویزیون ال ای دی تی سی ال مدل 32D3000i سایز 32 اینچ
-                        </p>
-                        <div className="text-blue-900 opacity-90  text-center">
-                          <span className="mr-2 text-2xl font-bold">12000</span>
-                          <span className="font-light text-md mr-1">تومان</span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-      </SwiperSlide>
-      <SwiperSlide>
-      <Link className="no-underline">
-                    <div className="border w-40 hover:shadow-sm rounded ">
-                      <img src={product1} className="px-1" />
-                      <div className="mt-1 px-2 py-3">
-                        <p className="font-light text-[#57606f] opacity-90 text-[13px] text-center">
-                          تلویزیون ال ای دی تی سی ال مدل 32D3000i سایز 32 اینچ
-                        </p>
-                        <div className="text-blue-900 opacity-90  text-center">
-                          <span className="mr-2 text-2xl font-bold">12000</span>
-                          <span className="font-light text-md mr-1">تومان</span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-      </SwiperSlide>
-      <SwiperSlide>
-      <Link className="no-underline">
-                    <div className="border w-40 hover:shadow-sm rounded ">
-                      <img src={product1} className="px-1" />
-                      <div className="mt-1 px-2 py-3">
-                        <p className="font-light text-[#57606f] opacity-90 text-[13px] text-center">
-                          تلویزیون ال ای دی تی سی ال مدل 32D3000i سایز 32 اینچ
-                        </p>
-                        <div className="text-blue-900 opacity-90  text-center">
-                          <span className="mr-2 text-2xl font-bold">12000</span>
-                          <span className="font-light text-md mr-1">تومان</span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-      </SwiperSlide>
-      <SwiperSlide>
-      <Link className="no-underline">
-                    <div className="border w-40 hover:shadow-sm rounded ">
-                      <img src={product1} className="px-1" />
-                      <div className="mt-1 px-2 py-3">
-                        <p className="font-light text-[#57606f] opacity-90 text-[13px] text-center">
-                          تلویزیون ال ای دی تی سی ال مدل 32D3000i سایز 32 اینچ
-                        </p>
-                        <div className="text-blue-900 opacity-90  text-center">
-                          <span className="mr-2 text-2xl font-bold">12000</span>
-                          <span className="font-light text-md mr-1">تومان</span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-      </SwiperSlide>
-      <SwiperSlide>
-      <Link className="no-underline">
-                    <div className="border w-40 hover:shadow-sm rounded ">
-                      <img src={product1} className="px-1" />
-                      <div className="mt-1 px-2 py-3">
-                        <p className="font-light text-[#57606f] opacity-90 text-[13px] text-center">
-                          تلویزیون ال ای دی تی سی ال مدل 32D3000i سایز 32 اینچ
-                        </p>
-                        <div className="text-blue-900 opacity-90  text-center">
-                          <span className="mr-2 text-2xl font-bold">12000</span>
-                          <span className="font-light text-md mr-1">تومان</span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-      </SwiperSlide>
-      <SwiperSlide>
-      <Link className="no-underline">
-                    <div className="border w-40 hover:shadow-sm rounded ">
-                      <img src={product1} className="px-1" />
-                      <div className="mt-1 px-2 py-3">
-                        <p className="font-light text-[#57606f] opacity-90 text-[13px] text-center">
-                          تلویزیون ال ای دی تی سی ال مدل 32D3000i سایز 32 اینچ
-                        </p>
-                        <div className="text-blue-900 opacity-90  text-center">
-                          <span className="mr-2 text-2xl font-bold">12000</span>
-                          <span className="font-light text-md mr-1">تومان</span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-      </SwiperSlide>
+        ))
+      }
+     
     </Swiper>
     </div>
     <div className="container mx-auto px-4">
@@ -268,17 +141,20 @@ export default function Home() {
       <h2 className="mr-4 mt-2">وبلاگ ما : </h2>
     <Swiper
     breakpoints={{
+       300: {
+        slidesPerView:2
+      },
       560: {
         slidesPerView:2
       },
       640: {
-        slidesPerView:4
+        slidesPerView:3
       },
       768: {
         slidesPerView: 6,
       },
       1024 :{
-        slidesPerView: 8,
+        slidesPerView: 6,
       }
     }}
     modules={[Navigation]}
@@ -288,182 +164,23 @@ export default function Home() {
       pagination={{ clickable: true }}
       scrollbar={{ draggable: true }}
     >
-      <SwiperSlide>
-      <Link className="no-underline">
+      {
+       data.length > 1 ? data.map((item)=>(
+ <SwiperSlide key={item._id}>
+      <Link to={`/blog/${item._id}`} className="no-underline">
                     <div className="border w-40 hover:shadow-sm rounded ">
-                      <img src={product1} className="px-1" />
+                      <img src={`http://localhost:5000/uploads/thumbnails/${item.thumbnail}`} className="px-0 rounded-t-md w-full h-28"  />
                       <div className="mt-1 px-2 py-3">
-                        <p className="font-light text-[#57606f] opacity-90 text-[13px] text-center">
-                          تلویزیون ال ای دی تی سی ال مدل 32D3000i سایز 32 اینچ
+                        <p className="font-bold text-black  text-lg text-center">
+                            {item.title}
                         </p>
-                        <div className="text-blue-900 opacity-90  text-center">
-                          <span className="mr-2 text-2xl font-bold">12000</span>
-                          <span className="font-light text-md mr-1">تومان</span>
-                        </div>
                       </div>
                     </div>
                   </Link>
       </SwiperSlide>
-      <SwiperSlide>
-      <Link className="no-underline">
-                    <div className="border w-40 hover:shadow-sm rounded ">
-                      <img src={product1} className="px-1" />
-                      <div className="mt-1 px-2 py-3">
-                        <p className="font-light text-[#57606f] opacity-90 text-[13px] text-center">
-                          تلویزیون ال ای دی تی سی ال مدل 32D3000i سایز 32 اینچ
-                        </p>
-                        <div className="text-blue-900 opacity-90  text-center">
-                          <span className="mr-2 text-2xl font-bold">12000</span>
-                          <span className="font-light text-md mr-1">تومان</span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-      </SwiperSlide>
-      <SwiperSlide>
-      <Link className="no-underline">
-                    <div className="border w-40 hover:shadow-sm rounded ">
-                      <img src={product1} className="px-1" />
-                      <div className="mt-1 px-2 py-3">
-                        <p className="font-light text-[#57606f] opacity-90 text-[13px] text-center">
-                          تلویزیون ال ای دی تی سی ال مدل 32D3000i سایز 32 اینچ
-                        </p>
-                        <div className="text-blue-900 opacity-90  text-center">
-                          <span className="mr-2 text-2xl font-bold">12000</span>
-                          <span className="font-light text-md mr-1">تومان</span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-      </SwiperSlide>
-      <SwiperSlide>
-      <Link className="no-underline">
-                    <div className="border w-40 hover:shadow-sm rounded ">
-                      <img src={product1} className="px-1" />
-                      <div className="mt-1 px-2 py-3">
-                        <p className="font-light text-[#57606f] opacity-90 text-[13px] text-center">
-                          تلویزیون ال ای دی تی سی ال مدل 32D3000i سایز 32 اینچ
-                        </p>
-                        <div className="text-blue-900 opacity-90  text-center">
-                          <span className="mr-2 text-2xl font-bold">12000</span>
-                          <span className="font-light text-md mr-1">تومان</span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-      </SwiperSlide>
-      <SwiperSlide>
-      <Link className="no-underline">
-                    <div className="border w-40 hover:shadow-sm rounded ">
-                      <img src={product1} className="px-1" />
-                      <div className="mt-1 px-2 py-3">
-                        <p className="font-light text-[#57606f] opacity-90 text-[13px] text-center">
-                          تلویزیون ال ای دی تی سی ال مدل 32D3000i سایز 32 اینچ
-                        </p>
-                        <div className="text-blue-900 opacity-90  text-center">
-                          <span className="mr-2 text-2xl font-bold">12000</span>
-                          <span className="font-light text-md mr-1">تومان</span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-      </SwiperSlide>
-      <SwiperSlide>
-      <Link className="no-underline">
-                    <div className="border w-40 hover:shadow-sm rounded ">
-                      <img src={product1} className="px-1" />
-                      <div className="mt-1 px-2 py-3">
-                        <p className="font-light text-[#57606f] opacity-90 text-[13px] text-center">
-                          تلویزیون ال ای دی تی سی ال مدل 32D3000i سایز 32 اینچ
-                        </p>
-                        <div className="text-blue-900 opacity-90  text-center">
-                          <span className="mr-2 text-2xl font-bold">12000</span>
-                          <span className="font-light text-md mr-1">تومان</span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-      </SwiperSlide>
-      <SwiperSlide>
-      <Link className="no-underline">
-                    <div className="border w-40 hover:shadow-sm rounded ">
-                      <img src={product1} className="px-1" />
-                      <div className="mt-1 px-2 py-3">
-                        <p className="font-light text-[#57606f] opacity-90 text-[13px] text-center">
-                          تلویزیون ال ای دی تی سی ال مدل 32D3000i سایز 32 اینچ
-                        </p>
-                        <div className="text-blue-900 opacity-90  text-center">
-                          <span className="mr-2 text-2xl font-bold">12000</span>
-                          <span className="font-light text-md mr-1">تومان</span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-      </SwiperSlide>
-      <SwiperSlide>
-      <Link className="no-underline">
-                    <div className="border w-40 hover:shadow-sm rounded ">
-                      <img src={product1} className="px-1" />
-                      <div className="mt-1 px-2 py-3">
-                        <p className="font-light text-[#57606f] opacity-90 text-[13px] text-center">
-                          تلویزیون ال ای دی تی سی ال مدل 32D3000i سایز 32 اینچ
-                        </p>
-                        <div className="text-blue-900 opacity-90  text-center">
-                          <span className="mr-2 text-2xl font-bold">12000</span>
-                          <span className="font-light text-md mr-1">تومان</span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-      </SwiperSlide>
-      <SwiperSlide>
-      <Link className="no-underline">
-                    <div className="border w-40 hover:shadow-sm rounded ">
-                      <img src={product1} className="px-1" />
-                      <div className="mt-1 px-2 py-3">
-                        <p className="font-light text-[#57606f] opacity-90 text-[13px] text-center">
-                          تلویزیون ال ای دی تی سی ال مدل 32D3000i سایز 32 اینچ
-                        </p>
-                        <div className="text-blue-900 opacity-90  text-center">
-                          <span className="mr-2 text-2xl font-bold">12000</span>
-                          <span className="font-light text-md mr-1">تومان</span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-      </SwiperSlide>
-      <SwiperSlide>
-      <Link className="no-underline">
-                    <div className="border w-40 hover:shadow-sm rounded ">
-                      <img src={product1} className="px-1" />
-                      <div className="mt-1 px-2 py-3">
-                        <p className="font-light text-[#57606f] opacity-90 text-[13px] text-center">
-                          تلویزیون ال ای دی تی سی ال مدل 32D3000i سایز 32 اینچ
-                        </p>
-                        <div className="text-blue-900 opacity-90  text-center">
-                          <span className="mr-2 text-2xl font-bold">12000</span>
-                          <span className="font-light text-md mr-1">تومان</span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-      </SwiperSlide>
-      <SwiperSlide>
-      <Link className="no-underline">
-                    <div className="border w-40 hover:shadow-sm rounded ">
-                      <img src={product1} className="px-1" />
-                      <div className="mt-1 px-2 py-3">
-                        <p className="font-light text-[#57606f] opacity-90 text-[13px] text-center">
-                          تلویزیون ال ای دی تی سی ال مدل 32D3000i سایز 32 اینچ
-                        </p>
-                        <div className="text-blue-900 opacity-90  text-center">
-                          <span className="mr-2 text-2xl font-bold">12000</span>
-                          <span className="font-light text-md mr-1">تومان</span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-      </SwiperSlide>
+        )):<p className="text-center">وبلاگ ما خالی است</p>
+      }
+          
     </Swiper>
     </div>
 

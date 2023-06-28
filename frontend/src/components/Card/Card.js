@@ -9,7 +9,7 @@ export default function Card(props) {
     <>
       <div className="bg-white shadow-sm p-4 my-2 rounded">
         <div className="grid lg:grid-rows-1 gap-2 lg:grid-cols-3 grid-cols-1">
-          <div className="bg-black h-[155px] rounded"></div>
+          <img src={`http://localhost:5000/uploads/thumbnails/${props.img}`} className="px-0 rounded-t-md w-full h-[155px]"  />
           <div className="lg:col-span-2">
             <Link
               to={`/blog/${props.url}`}

@@ -110,7 +110,7 @@ export default function Blog() {
             
               data.map((item)=>(
                 <div key={item._id}>
-                  <Card url={item._id} title={item.title} cat={findCat(item.cat)} />
+                  <Card url={item._id} img={item.thumbnail} title={item.title} cat={findCat(item.cat)} />
                 </div>
               ))
            }
