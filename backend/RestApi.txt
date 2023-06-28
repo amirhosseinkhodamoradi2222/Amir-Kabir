@@ -15,6 +15,11 @@ remove blog:  http://localhost:5000/admin/deleteblog/:id  *DELETE paramas
 
 
 
-//! Add product
+//!  product
 
-add product :  http://localhost:5000/user/product *POST  {title,body,price,thumbnail,cat,[image]}
+add product :  http://localhost:5000/user/product *POST  {title,body,price,thumbnail,cat,[image]};
+get products : http://localhost:5000/user/products *GET {title,body,price,thumbnail,cat,[image]}
+get singel products : http://localhost:5000/user/product/:id *GET {title,body,price,thumbnail,cat,[image]}
+patch edit products : http://localhost:5000/user/product/:id *PATCH {title,body,price,thumbnail,cat,[image]}
+delete singel producet : http://localhost:5000/user/product/:id *DELETE parames
+
