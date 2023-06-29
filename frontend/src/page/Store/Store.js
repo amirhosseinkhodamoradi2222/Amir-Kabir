@@ -8,27 +8,25 @@ import Insta from "../../components/Insta/Insta";
 import product1 from "../../img/product3.webp";
 import Navbars from "../../components/Nanbar/Navbars";
 import Footer from "../../components/Footer/Footer";
+import NotProduct from "../../components/Notproduct/NotProduct";
 
 function Store() {
-  const [product,setProduct] = useState([])
+  const [product, setProduct] = useState([]);
 
   const getProduct = async () => {
-    const res = await axios.get('http://localhost:5000/user/products')
-    const data = await res.data.post
-    setProduct(data)
+    const res = await axios.get("http://localhost:5000/user/products");
+    const data = await res.data.post;
+    setProduct(data);
     console.log(data);
-  }
-  
+  };
 
+  useEffect(() => {
+    getProduct();
+  }, []);
 
-  useEffect(()=>{
-    getProduct()
-  },[])
-
- 
   return (
     <>
-    <Navbars/>
+      <Navbars />
       <section className="container mt-2">
         <div className="grid gap-1 relative md:gap-4 md:grid-rows-1 md:grid-cols-2 grid-rows-1 grid-cols-1 lg:grid-rows-1 lg:grid-cols-4">
           <div className="lg:col-span-1 ">
@@ -123,31 +121,41 @@ function Store() {
                     جدید ترین
                   </button>
                 </div>
-                <div className="grid gap-4 p-3 md:grid-rows-1 md:grid-cols-2 grid-rows-1 grid-cols-1 lg:grid-rows-1 lg:grid-cols-4">
-                {product.map((item)=>(
-                  <Link to={item._id} className="no-underline">
-                    <div className="border hover:shadow-sm  rounded  ">
-                      <img src={`http://localhost:5000/uploads/prodec/thumbnails/${item.thumbnail}`} className="px-0 rounded-t-md w-full h-28"  />
-                      <div className="mt-1 px-2 py-3">
-                        <p className=" text-[#57606f] opacity-90 text-md font-bold text-right">
-                            {item.title}
-                        </p>
-                        <div className="text-blue-900 opacity-90 pb-4 text-center">
-                          <span className="mr-2 text-2xl font-bold">{item.price}</span>
-                          <span className="font-light text-md mr-1">تومان</span>
+                {product.length > 0 ? (
+                  <div className="grid gap-4 p-3 md:grid-rows-1 md:grid-cols-2 grid-rows-1 grid-cols-1 lg:grid-rows-1 lg:grid-cols-4">
+                    {product.map((item) => (
+                      <Link to={item._id} className="no-underline">
+                        <div className="border hover:shadow-sm  rounded  ">
+                          <img
+                            src={`http://localhost:5000/uploads/prodec/thumbnails/${item.thumbnail}`}
+                            className="px-0 rounded-t-md w-full h-28"
+                          />
+                          <div className="mt-1 px-2 py-3">
+                            <p className=" text-[#57606f] opacity-90 text-md font-bold text-right">
+                              {item.title}
+                            </p>
+                            <div className="text-blue-900 opacity-90 pb-4 text-center">
+                              <span className="mr-2 text-2xl font-bold">
+                                {item.price}
+                              </span>
+                              <span className="font-light text-md mr-1">
+                                تومان
+                              </span>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-
-                </div>
+                      </Link>
+                    ))}
+                  </div>
+                ) : (
+                  <NotProduct title="محصولی برای نمایش موجود نیست" />
+                )}
               </div>
             </div>
           </div>
         </div>
       </section>
-      <Footer/>
+      <Footer />
     </>
   );
 }
