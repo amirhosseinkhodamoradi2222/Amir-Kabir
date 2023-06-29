@@ -19,7 +19,12 @@ export default function ListProduct_dashbord() {
     const res = await axios.get('http://localhost:5000/user/products')
     const data = await res.data.post
     setProduct(data)
-    console.log(data);
+  }
+
+  const deleteProduct = (item) => {
+    const res = axios.delete(`http://localhost:5000/user/product/${item._id}`)
+    // console.log(item);
+    getProduct()
   }
   
   useEffect(()=>{
@@ -71,7 +76,7 @@ export default function ListProduct_dashbord() {
               <td>{item.title}</td>
               <td>{item.price}</td>
               <td><Link to={`/editeproduct_dashbord/${item._id}`} className="w-full bg-teal-500  text-white rounded-sm px-2 no-underline ">ویرایش</Link></td>
-              <td><button  className="bg-red-500 text-white px-2 rounded-sm no-underline">حذف</button></td>
+              <td><button onClick={()=> deleteProduct(item)}  className="bg-red-500 text-white px-2 rounded-sm no-underline">حذف</button></td>
             </tr>
             ))}
           </tbody>

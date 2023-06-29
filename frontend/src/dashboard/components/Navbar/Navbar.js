@@ -9,11 +9,11 @@ import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import { useNavigate  } from 'react-router-dom';
-import axios from 'axios'
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Navbars() {
-  const history = useNavigate ();
+  const history = useNavigate();
 
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -21,15 +21,14 @@ function Navbars() {
     setAnchorElUser(event.currentTarget);
   };
 
-
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
   const logOut = async () => {
     // const res = await axios.post('',{})
     // localStorage.removeItem('')
-    history('/admin')
-  }
+    history("/admin");
+  };
 
   return (
     <AppBar
@@ -63,7 +62,9 @@ function Navbars() {
               onClose={handleCloseUserMenu}
             >
               <MenuItem onClick={handleCloseUserMenu}>
-               <button onClick={logOut}><Typography textAlign="center">خروج</Typography></button>
+                <button onClick={logOut}>
+                  <Typography textAlign="center">خروج</Typography>
+                </button>
               </MenuItem>
             </Menu>
           </Box>

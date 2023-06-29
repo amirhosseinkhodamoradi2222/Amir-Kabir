@@ -16,10 +16,10 @@ export default function Commint_dashbord() {
               <Sidebar_dashbord />
             </div>
             <div className="col-span-10">
-              <h1 className="font-medium my-4">وبلاگ سایت</h1>
+              <h1 className="font-medium my-4">درخواست ها</h1>
               <div className="flex gap-4">
         <Card border="secondary" style={{ width: '18rem' }}>
-          <Card.Title className="text-lg font-medium my-3 mx-2">تعداد پست های ما :</Card.Title>
+          <Card.Title className="text-lg font-medium my-3 mx-2">تعداد درخواست های ما :</Card.Title>
             <Card.Text className="text-xs font-light p-2 mb-2">
             در کادر زیر هر متنی را که دوست دارید تایپ کنید تا ما آن را برایتان نگه داریم و همیشه در دسترس شما قرار دهیم
             </Card.Text>
@@ -30,14 +30,11 @@ export default function Commint_dashbord() {
           <Table striped bordered hover responsive>
           <thead>
             <tr className="font-light">
-              <th>لیست سفارشات</th>
-              <th>کد محصول</th>
-              <th>دسته بندی</th>
-              <th>قیمت</th>
-              <td>نام و نام خانوادگی</td>
-              <td>شماره تلفن</td>
-              <td>ادرس</td>
-              <td>ایمیل</td>
+              <th className="text-center">شماره</th>
+              <td className="text-center">نام و نام خانوادگی</td>
+              <td className="text-center">شماره تلفن</td>
+              <th className="text-center">دانلود</th>
+              <th className="text-center">پاسخ در خواست</th>
             </tr>
           </thead>
           <tbody>
@@ -45,11 +42,8 @@ export default function Commint_dashbord() {
               <td>1</td>
               <td>Mark</td>
               <td>Otto</td>
+              <td><Button variant="success" className="w-full text-white px-0" size="sm">دانلود ضمیمه</Button></td>
               <td>Otto</td>
-              <td>Otto</td>
-              <td>Otto</td>
-              <td><Button variant="info" className="w-full text-white px-0" size="sm">ویرایش</Button></td>
-              <td><Button variant="outline-danger" className="w-full px-0" size="sm">حذف</Button></td>
             </tr>
           </tbody>
         </Table>

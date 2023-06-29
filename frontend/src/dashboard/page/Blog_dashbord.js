@@ -34,9 +34,9 @@ export default function Blog_dashbord() {
     setCat(res.data.cat)
   }
 
-  const btn_delete = () => {
-    // axios.delete(`http://localhost:5000/admin/deleteblog/${id}`)
-    
+  const btn_delete = (item) => {
+    axios.delete(`http://localhost:5000/admin/deleteblog/${item._id}`)
+    blogs()
   }
 
   useEffect(()=>{
@@ -89,7 +89,7 @@ export default function Blog_dashbord() {
                 <td>{item.title}</td>
                 <td>{findCat(item.cat)}</td>
                 <td><Link to={`/editeblog_dashbord/${item._id}`} className="w-full text-white bg-cyan-500 px-4 no-underline rounded-sm" size="sm">ویرایش</Link></td>
-                <td ><Button variant="outline-danger" onClick={console.log('fdsf')/''}  className="w-full px-0" size="sm">حذف</Button></td>
+                <td ><Button variant="outline-danger" onClick={()=> btn_delete(item)}  className="w-full px-0" size="sm">حذف</Button></td>
               </tr>
             </tbody>
             ))
