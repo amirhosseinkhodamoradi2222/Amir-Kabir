@@ -17,13 +17,13 @@ function Blog_detale() {
   let params = useParams()
 
   const blogs = async () => {
-    const res = await axios.get(`http://localhost:5000/admin/getblog/${params.id}`)
+    const res = await axios.get(`http://localhost:5000/getblog/${params.id}`)
     const data = await res.data.blog
     setData(data)
     setDescription(data.des)
   }
   const catgory = async () =>{
-    const res = await axios.get('http://localhost:5000/admin/getCat')
+    const res = await axios.get('http://localhost:5000/getCat')
     setCat(res.data.cat)
   }
 

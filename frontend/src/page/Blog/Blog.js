@@ -15,12 +15,12 @@ export default function Blog() {
   const [loading, setLoading] = useState(true);
 
   const catgory = async () => {
-    const res = await axios.get("http://localhost:5000/admin/getCat");
+    const res = await axios.get("http://localhost:5000/getCat");
     setCat(res.data.cat);
   };
 
   const blogs = async () => {
-    const res = await axios.get("http://localhost:5000/admin/getblog");
+    const res = await axios.get("http://localhost:5000/getblog");
     const data = await res.data.blog;
     setData(data);
     setLoading(false);

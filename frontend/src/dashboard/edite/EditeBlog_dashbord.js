@@ -36,6 +36,7 @@ function EditeBlog_dashbord() {
         {
           headers: {
             "Content-Type": "multipart/form-data",
+          "Authorization" : `Bearer ${localStorage.getItem('token')}`
           },
         }
       );
@@ -49,13 +50,13 @@ function EditeBlog_dashbord() {
   };
 
   const catgory = async () => {
-    const res = await axios.get("http://localhost:5000/admin/getCat");
+    const res = await axios.get("http://localhost:5000/getCat");
     setCat(res.data.cat);
   };
 
   const blogs = async () => {
     const res = await axios.get(
-      `http://localhost:5000/admin/getblog/${param.id}`
+      `http://localhost:5000/getblog/${param.id}`
     );
     const data = await res.data.blog;
     setData(data);

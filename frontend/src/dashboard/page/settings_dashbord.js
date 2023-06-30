@@ -20,14 +20,19 @@ import "../global.css";
   const [error, setError] = useState();
 
   const getDeta = async () => {
-    let res = await axios.get("http://localhost:5000/admin/getCat");
+    let res = await axios.get("http://localhost:5000/getCat");
     let data = await res.data.cat;
     setGetcat(data);
   };
 
   const sendCat = () => {
     axios
-      .post("http://localhost:5000/admin/setCat", { titel: inputcat })
+      .post("http://localhost:5000/admin/setCat", { titel: inputcat },
+      {
+        headers:{
+          "Authorization" : `Bearer ${localStorage.getItem('token')}`
+        }
+      })
       .then((res) => {
         getDeta();
         console.log(res.status);

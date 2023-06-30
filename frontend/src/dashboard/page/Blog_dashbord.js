@@ -18,7 +18,7 @@ function Blog_dashbord() {
   const [deleteid,setDeleteid] = useState('')
 
   const blogs = async () => {
-    const res = await axios.get(`http://localhost:5000/admin/getblog`)
+    const res = await axios.get(`http://localhost:5000/getblog`)
     const data = await res.data.blog
     setData(data)
     setLighnt(data.length)
@@ -31,12 +31,16 @@ function Blog_dashbord() {
     return a.toString().split(",").join("");
   }
   const catgory = async () =>{
-    const res = await axios.get('http://localhost:5000/admin/getCat')
+    const res = await axios.get(' http://localhost:5000/getCat')
     setCat(res.data.cat)
   }
 
   const btn_delete = (item) => {
-    axios.delete(`http://localhost:5000/admin/deleteblog/${item._id}`)
+    axios.delete(`http://localhost:5000/admin/deleteblog/${item._id}`,{
+      headers : {
+        "Authorization" : `Bearer ${localStorage.getItem('token')}`
+      }
+    })
     blogs()
   }
 

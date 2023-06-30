@@ -20,7 +20,7 @@ function AddBlog_dashbord() {
   const [catSelect, setCatSelect] = useState("");
   const [cat, setCat] = useState([]);
   const getCat = async () => {
-    const datacat = await axios.get("http://localhost:5000/admin/getCat");
+    const datacat = await axios.get(" http://localhost:5000/getCat");
     setCat(datacat.data.cat);
   };
   function handleChange(event, editor) {
@@ -40,6 +40,7 @@ function AddBlog_dashbord() {
         {
           headers: {
             "Content-Type": "multipart/form-data",
+          "Authorization" : `Bearer ${localStorage.getItem('token')}`
           },
         }
       );

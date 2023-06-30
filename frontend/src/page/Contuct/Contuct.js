@@ -21,7 +21,7 @@ export default function Contuct() {
   const [lastname, setLastname] = useState("");
   const [title, setTitle] = useState("");
   const [catSelect, setCatSelect] = useState("");
-
+console.log(catSelect)
   const btn_sendmass = async () => {
     if (title && lastname && phone && img) {
       const res = await axios.post(
@@ -186,9 +186,9 @@ export default function Contuct() {
                     aria-label="Default select example"
                     className="font-light mt-2"
                   >
-                    <option>تلگرام</option>
+                    <option value={'telegram'}>تلگرام</option>
 
-                    <option>واتساپ</option>
+                    <option value={'watsapp'}>واتساپ</option>
                   </Form.Select>
                 </div>
               </div>

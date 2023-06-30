@@ -29,7 +29,7 @@ function AddProduct_dashbord() {
   console.log(catSelect);
 
   const getCat = async () => {
-    const datacat = await axios.get("http://localhost:5000/admin/getCat");
+    const datacat = await axios.get(" http://localhost:5000/getCat");
     setCat(datacat.data.cat);
   };
   console.log(catSelect);
@@ -48,7 +48,7 @@ function AddProduct_dashbord() {
         {
           headers: {
             "Content-Type": "multipart/form-data",
-            // "Authorization":""
+            "Authorization" : `Bearer ${localStorage.getItem('token')}`
           },
         }
       );
