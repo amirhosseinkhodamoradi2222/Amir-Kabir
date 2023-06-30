@@ -9,8 +9,9 @@ import Form from "react-bootstrap/Form";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { Navigate, useNavigate } from "react-router-dom";
+import Authentication from '../../Authentication/Authentication'
 
-export default function AddBlog_dashbord() {
+function AddBlog_dashbord() {
   const navigate = useNavigate();
 
   const [content, setContent] = useState("");
@@ -129,3 +130,4 @@ export default function AddBlog_dashbord() {
     </>
   );
 }
+export default Authentication(AddBlog_dashbord)

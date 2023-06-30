@@ -1,18 +1,17 @@
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import "./Login.css";
 
-
 export default function Login() {
-  const [userName, setUserNanme] = useState();
-  const [password, setPassword] = useState();
+  const navegate = useNavigate();
+  const [userName, setUserNanme] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState();
   const [show, setShow] = useState(false);
-  const [res, setRes] = useState('');
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -20,11 +19,17 @@ export default function Login() {
   const login = async () => {
     if (userName && password) {
       setLoading(true);
-      const data = await axios.post("localhost:/5000/user/login", {
-        email: userName,
+      const data = await axios.post("http://localhost:5000/admin/loginadmin", {
+        username: userName,
         password: password,
       });
-      console.log(data.data.token);
+      if (data.data.token) {
+        localStorage.setItem("token", data.data.token);
+        setLoading(false);
+        navegate("/settings_dashbord");
+      }
+    } else {
+      toast.info("لطفا تمام فیلد ها را پر کنید");
     }
   };
 
@@ -35,7 +40,9 @@ export default function Login() {
           <div className="p-3">
             <div className="">
               <div className="">
-                <h1 className="text-center text-2xl mb-16 font-bold">ورود به پنل ادمین</h1>
+                <h1 className="text-center text-2xl mb-16 font-bold">
+                  ورود به پنل ادمین
+                </h1>
                 <div className="grid grid-rows-1 grid-cols-1 justify-center">
                   <label className="text-md opacity-60  text-right font-light">
                     نام کاربری
@@ -112,9 +119,7 @@ export default function Login() {
                     آیا رمز خود را فراموش کردید؟
                   </p>
                 </div>
-                
               </div>
-            
             </div>
           </div>
         </div>

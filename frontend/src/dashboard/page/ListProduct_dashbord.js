@@ -8,9 +8,10 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Authentication from '../../Authentication/Authentication'
 
 
-export default function ListProduct_dashbord() {
+ function ListProduct_dashbord() {
   const [product,setProduct] = useState([])
 
 
@@ -88,3 +89,5 @@ export default function ListProduct_dashbord() {
         </>
       );
 }
+
+export default Authentication(ListProduct_dashbord)

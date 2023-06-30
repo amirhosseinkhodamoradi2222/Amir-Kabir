@@ -9,8 +9,9 @@ import Form from "react-bootstrap/Form";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { BiX } from "react-icons/bi";
+import Authentication from '../../Authentication/Authentication'
 
-export default function AddProduct_dashbord() {
+function AddProduct_dashbord() {
   const [modalShow, setModalShow] = useState(false);
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
@@ -204,3 +205,4 @@ export default function AddProduct_dashbord() {
     </>
   );
 }
+export default Authentication(AddProduct_dashbord)

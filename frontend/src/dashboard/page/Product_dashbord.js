@@ -5,9 +5,9 @@ import Navbars from "../../dashboard/components/Navbar/Navbar";
 import Sidebar_dashbord from "../../dashboard/components/Sidebars/Sidebar_dashbord";
 import Table from 'react-bootstrap/Table';
 import axios from "axios";
+import Authentication from '../../Authentication/Authentication'
 
-
-export default function Product_dashbord() {
+function Product_dashbord() {
   return (
     <>
       <Navbars />
@@ -48,3 +48,5 @@ export default function Product_dashbord() {
     </>
   );
 }
+
+export default Authentication(Product_dashbord)

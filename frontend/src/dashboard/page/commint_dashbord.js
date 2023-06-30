@@ -5,8 +5,9 @@ import Table from "react-bootstrap/Table";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
+import Authentication from '../../Authentication/Authentication'
 
-export default function Commint_dashbord() {
+function Commint_dashbord() {
   const [data, setData] = useState([]);
 
   const getData = async () => {
@@ -77,3 +78,4 @@ export default function Commint_dashbord() {
     </>
   );
 }
+export default Authentication(Commint_dashbord)

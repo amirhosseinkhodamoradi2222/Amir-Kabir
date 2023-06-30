@@ -24,9 +24,8 @@ function Navbars() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  const logOut = async () => {
-    // const res = await axios.post('',{})
-    // localStorage.removeItem('')
+  const logOut = () => {
+    localStorage.removeItem("token");
     history("/admin");
   };
 

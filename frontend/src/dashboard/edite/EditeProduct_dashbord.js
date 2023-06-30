@@ -11,8 +11,9 @@ import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import {useParams} from 'react-router-dom'
 import { BiX } from "react-icons/bi";
+import Authentication from '../../Authentication/Authentication'
 
-export default function EditeProduct_dashbord() {
+function EditeProduct_dashbord() {
   const param = useParams()
 
 
@@ -157,3 +158,5 @@ console.log(price)
         </>
       );
 }
+
+export default Authentication(EditeProduct_dashbord)

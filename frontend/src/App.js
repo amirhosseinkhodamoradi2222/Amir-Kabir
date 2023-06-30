@@ -10,21 +10,21 @@ import Contuct from "./page/Contuct/Contuct";
 import Cardshop from "./page/Cardshop/Cardshop";
 import Register from "./page/Register/Register";
 import Notfound from "./Notfound";
-import '../node_modules/react-dropzone-uploader/dist/styles.css'
+import "../node_modules/react-dropzone-uploader/dist/styles.css";
 
 //Authentication
-import Authentication from '../src/Authentication/Authentication'
-//Dashboard 
-import Settings_dashbord from './dashboard/page/settings_dashbord'
-import Commint_dashbord from './dashboard/page/commint_dashbord'
-import Blog_dashbord from './dashboard/page/Blog_dashbord'
-import ListProduct_dashbord from './dashboard/page/ListProduct_dashbord'
-import Product_dashbord from './dashboard/page/Product_dashbord'
+import Authentication from "../src/Authentication/Authentication";
+//Dashboard
+import Settings_dashbord from "./dashboard/page/settings_dashbord";
+import Commint_dashbord from "./dashboard/page/commint_dashbord";
+import Blog_dashbord from "./dashboard/page/Blog_dashbord";
+import ListProduct_dashbord from "./dashboard/page/ListProduct_dashbord";
+import Product_dashbord from "./dashboard/page/Product_dashbord";
 
-import AddBlog_dashbord from './dashboard/add/AddBlog_dashbord'
-import AddProduct_dashbord from './dashboard/add/addProduct_dashbord'
-import EditeBlog_dashbord from './dashboard/edite/EditeBlog_dashbord'
-import EditeProduct_dashbord from './dashboard/edite/EditeProduct_dashbord'
+import AddBlog_dashbord from "./dashboard/add/AddBlog_dashbord";
+import AddProduct_dashbord from "./dashboard/add/addProduct_dashbord";
+import EditeBlog_dashbord from "./dashboard/edite/EditeBlog_dashbord";
+import EditeProduct_dashbord from "./dashboard/edite/EditeProduct_dashbord";
 import Admin from "./page/Admin/Admin";
 function App() {
   return (
@@ -42,16 +42,28 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/admin" element={<Admin />} />
-          <Route path="/settings_dashbord" element={<Settings_dashbord/>} />
-          <Route path="/commint_dashbord" element={<Commint_dashbord/>} />
-          <Route path="/blog_dashbord" element={<Blog_dashbord/>} />
-          <Route path="/listproduct_dashbord" element={<ListProduct_dashbord/>} />
-          <Route path="/product_dashbord" element={<Product_dashbord/>} />
-          <Route path="/addblog_dashbord" element={<AddBlog_dashbord/>} />
-          <Route path="/addproduct_dashbord" element={<AddProduct_dashbord/>} />
-          <Route path="/editeblog_dashbord/:id" element={<EditeBlog_dashbord/>} />
-          <Route path="/editeproduct_dashbord/:id" element={<EditeProduct_dashbord/>} />
-          <Route path="*" element={<Notfound/>} />
+          <Route path="/commint_dashbord" element={<Commint_dashbord />} />
+          <Route path="/blog_dashbord" element={<Blog_dashbord />} />
+          <Route path="/settings_dashbord" element={<Settings_dashbord />} />
+          <Route
+            path="/listproduct_dashbord"
+            element={<ListProduct_dashbord />}
+          />
+          <Route path="/product_dashbord" element={<Product_dashbord />} />
+          <Route path="/addblog_dashbord" element={<AddBlog_dashbord />} />
+          <Route
+            path="/addproduct_dashbord"
+            element={<AddProduct_dashbord />}
+          />
+          <Route
+            path="/editeblog_dashbord/:id"
+            element={<EditeBlog_dashbord />}
+          />
+          <Route
+            path="/editeproduct_dashbord/:id"
+            element={<EditeProduct_dashbord />}
+          />
+          <Route path="*" element={<Notfound />} />
         </Routes>
       </BrowserRouter>
     </>

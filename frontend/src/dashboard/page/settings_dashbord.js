@@ -8,12 +8,13 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
+import Authentication from '../../Authentication/Authentication'
 
 import axios from "axios";
 //CSS
 import "../global.css";
 
-export default function Settings_dashbord() {
+ function Settings_dashbord() {
   const [inputcat, setInputcat] = useState("");
   const [getcat, setGetcat] = useState([]);
   const [error, setError] = useState();
@@ -136,3 +137,6 @@ export default function Settings_dashbord() {
     </>
   );
 }
+
+
+export default Authentication(Settings_dashbord)

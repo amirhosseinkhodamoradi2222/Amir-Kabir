@@ -8,9 +8,10 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Authentication from '../../Authentication/Authentication'
 
 
-export default function Blog_dashbord() {
+function Blog_dashbord() {
   const [data,setData] = useState([])
   const [cat,setCat] = useState([])
   const [lighnt,setLighnt] = useState('')
@@ -102,3 +103,5 @@ export default function Blog_dashbord() {
         </>
       );
 }
+
+export default Authentication(Blog_dashbord)
