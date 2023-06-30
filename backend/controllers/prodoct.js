@@ -10,15 +10,9 @@ exports.prodectAdd=async (req,res,next)=>{
   const fileName = `${shortId.generate()}_${thumbnail.name}`;
   const uploadPath = `${appRoot}/public/uploads/prodec/thumbnails/${fileName}`;
    
-  const fileNameimage = [];
+  let fileNameimage = [];
   const image = req.files ? req.files.image : {};
   
-  if(image)
-      for(let i=0 ; i<image.length ; i++){
-      fileNameimage.push(`${shortId.generate()}_${image[i].name}`); 
-    }
-  const uploadPathimage = `${appRoot}/public/uploads/prodec/image/${fileNameimage}`;
-
     
   try {
     
@@ -37,8 +31,12 @@ exports.prodectAdd=async (req,res,next)=>{
   throw error; });
 
    if(image){
-    if(image.name){
-  await sharp(image.data)
+   for(let i=0 ; i< image.length ; i++){
+    if(image[i].name){
+      fileNameimage.push(`${shortId.generate()}_${image[i].name}`); 
+   const uploadPathimage = `${appRoot}/public/uploads/prodec/image/${fileNameimage[i]}`;
+   
+  await sharp(image[i].data)
   .jpeg({ quality: 80 })
   .toFile(uploadPathimage)
   .catch((err) =>  {
@@ -47,6 +45,7 @@ exports.prodectAdd=async (req,res,next)=>{
 );
 error.statusCode = 422;
 throw error; });
+    }
 
     }
   }
@@ -196,24 +195,23 @@ exports.deleteProduct = async (req, res, next) => {
   try {
       const post = await Post.findByIdAndRemove(req.params.id);
       let filePathimage=[];
-      if(post.image){
-         filePathimage = `${appRoot}/public/uploads/prodec/image/${post.image}`;
+      for(let i=0;i < post.image.length; i++){
+      if(post.image[i]){
+         filePathimage = `${appRoot}/public/uploads/prodec/image/${post.image[i]}`;
+         fs.unlink(filePathimage,(err)=>{
+          if (err) {
+            const error = new Error(
+                "خطای در پاکسازی عکس های پست مربوطه رخ داده است"
+            );
+            error.statusCode = 400;
+            throw error;
+        }
+        })
       }
+    }
       const filePath = `${appRoot}/public/uploads/prodec/thumbnails/${post.thumbnail}`;
 
       fs.unlink(filePath, (err) => {
-         if(post.image){
-
-          fs.unlink(filePathimage,(err)=>{
-            if (err) {
-              const error = new Error(
-                  "خطای در پاکسازی عکس های پست مربوطه رخ داده است"
-              );
-              error.statusCode = 400;
-              throw error;
-          }
-          })
-         }
           if (err) {
               const error = new Error(
                   "خطای در پاکسازی عکس پست مربوطه رخ داده است"

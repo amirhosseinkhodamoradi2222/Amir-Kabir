@@ -1,6 +1,6 @@
 const { Router } = require("express");
 
-const {createUser,handleLogin,users}=require("../controllers/userController")
+const {createUser,handleLogin,users,callus}=require("../controllers/userController")
 const product=require("../controllers/prodoct")
 
 const router = new Router();
@@ -17,6 +17,11 @@ router.get('/product/:id',product.getsingelProduct);
 router.patch('/product/:id',product.editProduct);
 // ! delet sigel product
 router.delete('/product/:id',product.deleteProduct);
+
+
+
+//! callus
+router.post('/callus',callus);
 
 //!get Product
 router.get('/products',product.getProduct)

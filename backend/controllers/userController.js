@@ -1,6 +1,12 @@
 const User=require('../model/user');
+const Call=require('../model/callus');
 const jwt=require('jsonwebtoken')
 const bcrypt = require("bcrypt");
+const shortId = require("shortid");
+const appRoot = require("app-root-path");
+
+
+const fs=require('fs')
 
 exports.createUser = async (req, res, next) => {
   try {
@@ -73,5 +79,43 @@ exports.handleLogin = async (req, res, next) => {
 exports.users= async(req,res)=>{
     const user=await User.find({});
     res.send(user)
+}
+
+exports.callus=async(req,res,next)=>{
+    const filez = req.files ? req.files.filez : {};
+    const fileNamez = `${shortId.generate()}_${filez.name}`;
+    const uploadPathz = `${appRoot}/public/uploads/filepdf/${fileNamez}`;
+     
+  
+    try {
+      
+      req.body = { ...req.body, filez };
+        
+      await Call.callValidation(req.body);
+     await fs.writeFile(uploadPathz,filez.data,(err)=>{
+        if(err){
+            const error = new Error(
+                " مشکل در آپلود فایل ضمیمه"
+            );
+            error.statusCode = 422;
+            throw error;
+        }
+     })
+     
+
+  
+  
+       await Call.create({
+        ... req.body,
+        filez: fileNamez,
+        
+       })
+       
+       res.status(201).json({message:"ارسال محصول موفقیت آمیز بود"});
+    
+    } catch (err) {
+      next(err);
+    }
+       
 }
 

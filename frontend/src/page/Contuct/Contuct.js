@@ -25,11 +25,13 @@ export default function Contuct() {
   const btn_sendmass = async () => {
     if (title && lastname && phone && img) {
       const res = await axios.post(
+        "http://localhost:5000/user/callus",
         {
-          title: title,
-          lastname: lastname,
+          name: lastname,
+          body: lastname,
+          filez: img,
+          smedia: catSelect,
           phone: phone,
-          img: img,
         },
         {
           headers: {
@@ -39,7 +41,7 @@ export default function Contuct() {
       );
       setImg(null);
       setLastname("");
-      setPhone(""); 
+      setPhone("");
       setTitle("");
       toast.success("درخواست شما با موفقیت ارسال شد");
     } else {
@@ -162,7 +164,7 @@ export default function Contuct() {
                   <div className="flex font-light text-lg  text-md opacity-60  text-right">
                     {" "}
                     <HiOutlineClipboard color="#FFA000" className="mt-1 ml-2" />
-                    <p className="lg:text-lg text-sm">  عنوان</p>
+                    <p className="lg:text-lg text-sm"> عنوان</p>
                   </div>
                   <input
                     type="text"

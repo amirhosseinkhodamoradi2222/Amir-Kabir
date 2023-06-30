@@ -4,11 +4,15 @@ const fs=require('fs');
 const sharp = require("sharp");
 const shortId = require("shortid");
 const appRoot = require("app-root-path");
+const bcrypt=require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 
 
 const Cat=require('../model/cat');
 const Blog=require('../model/blog');
+const Call=require('../model/callus');
+const Admin=require('../model/Admin');
 
 
 exports.setCat=async(req,res,next)=>{
@@ -215,6 +219,103 @@ exports.deleteBlog = async (req, res, next) => {
               res.status(200).json({ message: "پست شما با موفقیت پاک شد" });
           }
       });
+  } catch (err) {
+      next(err);
+  }
+};
+
+exports.getcallus=async(req,res,next)=>{
+  try {
+
+    const call=await Call.find({}).sort('asc');
+    if(!call){
+      const error = new Error(
+        "درخواستی موجود نمی باشد"
+    );
+    error.statusCode = 422;
+    throw error;
+    }else{
+      res.status(201).json({call,message:"درخواست با موفیقت دریافت شد"});
+    }
+    
+
+  } catch (err) {
+    next(err);
+  }
+}
+
+exports.getsingelCall=async(req,res,next)=>{
+  try {
+      
+    const call=await Call.findOne({_id : req.params.id});
+
+    if(!call){
+      const error = new Error(
+        "درخواستی موجود نمی باشد"
+    );
+    error.statusCode = 422;
+    throw error;
+    }else{
+      res.status(201).json({call,message:"درخواست با موفیقت دریافت  شد"});
+    }
+    
+
+  } catch (err) {
+    next(err);
+  }
+}
+
+exports.createAdmin = async (req, res, next) => {
+  try {
+
+      const { username, password  } = req.body;
+
+      const user = await Admin.findOne({ username });
+      if (user) {
+          const error = new Error(
+              "کاربری با این ایمیل در پایگاه داده موجود است"
+          );
+          error.statusCode = 422;
+          throw error;
+      } else {
+          await Admin.create({ username, password });
+          res.status(201).json({ message: "عضویت موفقیت آمیز بود" });
+      }
+  } catch (err) {
+      next(err);
+  }
+};
+
+exports.handleLoginadmin = async (req, res, next) => {
+  const { username, password } = req.body;
+
+  try {
+      const user = await Admin.findOne({ username });
+      if (!user) {
+          const error = new Error("کاربری با این ایمیل یافت نشد");
+          error.statusCode = 404;
+          throw error;
+      }
+
+      const isEqual = await bcrypt.compare(password, user.password);
+
+      if (isEqual) {
+          const token = jwt.sign(
+              {
+                  user: {
+                      userId: user._id.toString(),
+                      username: user.username,
+                  },
+              },
+              process.env.JWT_SECRET
+          );
+         
+          res.status(200).json({ token, userId: user._id.toString() });
+      } else {
+          const error = new Error("نام کاربری یا کلمه عبور اشتباه است");
+          error.statusCode = 422;
+          throw error;
+      }
   } catch (err) {
       next(err);
   }
