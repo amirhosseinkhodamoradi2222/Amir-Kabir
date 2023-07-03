@@ -8,16 +8,38 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
-import Authentication from '../../Authentication/Authentication'
+import Authentication from "../../Authentication/Authentication";
+import { ToastContainer, toast } from "react-toastify";
 
 import axios from "axios";
 //CSS
 import "../global.css";
 
- function Settings_dashbord() {
+function Settings_dashbord() {
   const [inputcat, setInputcat] = useState("");
   const [getcat, setGetcat] = useState([]);
-  const [error, setError] = useState();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const getAdmin = async () => {
+    if (username && password) {
+      let res = await axios.post(
+        "http://localhost:5000/admin/addadmin",
+        {
+          username: username,
+          password: password,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      toast.success("اطلاعات ادمین با موفقیت ثبت شد");
+    } else {
+      toast.info("لطفا تمام فیلد ها را پر کنید");
+    }
+  };
 
   const getDeta = async () => {
     let res = await axios.get("http://localhost:5000/getCat");
@@ -27,12 +49,15 @@ import "../global.css";
 
   const sendCat = () => {
     axios
-      .post("http://localhost:5000/admin/setCat", { titel: inputcat },
-      {
-        headers:{
-          "Authorization" : `Bearer ${localStorage.getItem('token')}`
+      .post(
+        "http://localhost:5000/admin/setCat",
+        { titel: inputcat },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
-      })
+      )
       .then((res) => {
         getDeta();
         console.log(res.status);
@@ -109,39 +134,45 @@ import "../global.css";
                   aria-controls="panel2a-content"
                   id="panel2a-header"
                 >
-                  <Typography>کاربر</Typography>
+                  <Typography>مدیر فروشگاه</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <Typography>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Suspendisse malesuada lacus ex, sit amet blandit leo
-                    lobortis eget.
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel2a-content"
-                  id="panel2a-header"
-                >
-                  <Typography>تنظیمات وبلاگ</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Suspendisse malesuada lacus ex, sit amet blandit leo
-                    lobortis eget.
-                  </Typography>
+                  <div className="grid grid-rows-1 gap-4 grid-cols-1">
+                    <div>
+                      <p className="font-light pb-0">اضافه کردن مدیر</p>
+                      <label>نام کاربری</label>
+                      <TextField
+                        id="standard-basic"
+                        className="w-full"
+                        variant="standard"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                      />
+                      <label className="mt-4">رمز عبور</label>
+                      <TextField
+                        id="standard-basic"
+                        className="w-full"
+                        variant="standard"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
+                      <button
+                        className="w-1/2 py-1 rounded mt-4 shadow-sm bg-green-800 text-white"
+                        onClick={getAdmin}
+                      >
+                        ذخیره
+                      </button>
+                    </div>
+                  </div>
                 </AccordionDetails>
               </Accordion>
             </div>
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 }
 
-
-export default Authentication(Settings_dashbord)
+export default Authentication(Settings_dashbord);

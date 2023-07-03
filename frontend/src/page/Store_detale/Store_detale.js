@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect,useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import title from "../../img/f.webp";
 import Navbars from "../../components/Nanbar/Navbars";
 import Footer from "../../components/Footer/Footer";
 import axios from "axios";
 import parse from 'html-react-parser';
+
 
 function Store_detale() {
   const [prodec,setProduct] = useState({})
@@ -14,7 +15,7 @@ function Store_detale() {
 
  
   const params = useParams()
-  
+
  
   const getData = async () => {
     let res = await axios.get(`http://localhost:5000/user/product/${params.id}`)

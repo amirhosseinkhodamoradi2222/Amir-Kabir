@@ -8,11 +8,12 @@ import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import imgSlider from "../../img/2.webp";
 import axios from "axios";
 import NotProduct from "../../components/Notproduct/NotProduct";
-import NotBlog from '../../components/Notblog/NotBlog'
+import NotBlog from "../../components/Notblog/NotBlog";
 
 export default function Home() {
   const [product, setProduct] = useState([]);
   const [data, setData] = useState([]);
+  const [cat, setCat] = useState([]);
 
   const getProduct = async () => {
     const res = await axios.get("http://localhost:5000/user/products");
@@ -25,9 +26,15 @@ export default function Home() {
     setData(data);
   };
 
+  const catgory = async () => {
+    const res = await axios.get("http://localhost:5000/getCat");
+    setCat(res.data.cat);
+  };
+  console.log(cat);
   useEffect(() => {
     getProduct();
     blogs();
+    catgory();
   }, []);
 
   return (
@@ -57,9 +64,17 @@ export default function Home() {
         <h1 className="my-4 lg:text-2xl md:text-xl text-lg font-bold">
           دسته بندی محصولات الکتروتکنیک و کامپیوتر
         </h1>
-        <div className="flex gap-4 mx-4">
-          <div className="w-full h-20 bg-orange-600 rounded shadow-sm"></div>
-          <div className="w-full h-20 bg-green-600 rounded shadow-sm"></div>
+        <div className="grid lg:grid-cols-5 grid-cols-2 gap-4 mx-4">
+          {cat.map((item) => (
+            <Link className="no-underline" to={"store"}>
+              <div
+                key={item._id}
+                className="w-full text-black text-lg hover:bg-oreng hover:text-white h-20 rounded shadow-sm border text-center pt-4"
+              >
+                {item.titel}
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
       <div className="bg-white p-2">
@@ -116,7 +131,7 @@ export default function Home() {
             ))}
           </Swiper>
         ) : (
-          <NotProduct title='محصولی برای نمایش موجود نیست' />
+          <NotProduct title="محصولی برای نمایش موجود نیست" />
         )}
       </div>
       <div className="container mx-auto px-4">
@@ -163,56 +178,57 @@ export default function Home() {
       </div>
       <div className="bg-white p-2">
         <h2 className="mr-4 mt-2">وبلاگ ما : </h2>
-        {data.length > 0 ?(
+        {data.length > 0 ? (
           <Swiper
-          breakpoints={{
-            300: {
-              slidesPerView: 2,
-            },
-            560: {
-              slidesPerView: 2,
-            },
-            640: {
-              slidesPerView: 3,
-            },
-            768: {
-              slidesPerView: 6,
-            },
-            1024: {
-              slidesPerView: 6,
-            },
-          }}
-          modules={[Navigation]}
-          className="h-80 mt-4"
-          spaceBetween={20}
-          navigation
-          pagination={{ clickable: true }}
-          scrollbar={{ draggable: true }}
-        >
-          {data.length > 1 ? (
-            data.map((item) => (
-              <SwiperSlide key={item._id}>
-                <Link to={`/blog/${item._id}`} className="no-underline">
-                  <div className="border w-40 hover:shadow-sm rounded ">
-                    <img
-                      src={`http://localhost:5000/uploads/thumbnails/${item.thumbnail}`}
-                      className="px-0 rounded-t-md w-full h-28"
-                    />
-                    <div className="mt-1 px-2 py-3">
-                      <p className="font-bold text-black  text-lg text-center">
-                        {item.title}
-                      </p>
+            breakpoints={{
+              300: {
+                slidesPerView: 2,
+              },
+              560: {
+                slidesPerView: 2,
+              },
+              640: {
+                slidesPerView: 3,
+              },
+              768: {
+                slidesPerView: 6,
+              },
+              1024: {
+                slidesPerView: 6,
+              },
+            }}
+            modules={[Navigation]}
+            className="h-80 mt-4"
+            spaceBetween={20}
+            navigation
+            pagination={{ clickable: true }}
+            scrollbar={{ draggable: true }}
+          >
+            {data.length > 1 ? (
+              data.map((item) => (
+                <SwiperSlide key={item._id}>
+                  <Link to={`/blog/${item._id}`} className="no-underline">
+                    <div className="border w-40 hover:shadow-sm rounded ">
+                      <img
+                        src={`http://localhost:5000/uploads/thumbnails/${item.thumbnail}`}
+                        className="px-0 rounded-t-md w-full h-28"
+                      />
+                      <div className="mt-1 px-2 py-3">
+                        <p className="font-bold text-black  text-lg text-center">
+                          {item.title}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              </SwiperSlide>
-            ))
-          ) : (
-            <p className="text-center">وبلاگ ما خالی است</p>
-          )}
-        </Swiper>
-        ):<NotBlog title='صفحه وبلاگ ما خالی است'/>}
-        
+                  </Link>
+                </SwiperSlide>
+              ))
+            ) : (
+              <p className="text-center">وبلاگ ما خالی است</p>
+            )}
+          </Swiper>
+        ) : (
+          <NotBlog title="صفحه وبلاگ ما خالی است" />
+        )}
       </div>
 
       <Footer />

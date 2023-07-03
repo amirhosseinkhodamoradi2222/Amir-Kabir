@@ -10,6 +10,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { BiX } from "react-icons/bi";
 import Authentication from '../../Authentication/Authentication'
+import { Navigate } from "react-router-dom";
 
 function AddProduct_dashbord() {
   const [modalShow, setModalShow] = useState(false);
@@ -52,6 +53,7 @@ function AddProduct_dashbord() {
           },
         }
       );
+      toast.success('محصول با موفقیت اضافه شد')
     } else {
       toast.error("");
     }

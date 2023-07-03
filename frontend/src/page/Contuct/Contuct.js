@@ -198,7 +198,7 @@ console.log(catSelect)
                   className="font-light m-1 text-sm my-2"
                   variant="success"
                 >
-                  سایز فایل نباید بیشتر 5 مگابایت باشد
+                  فایل باید از نوع PDF باشد
                 </Alert>
                 <div className="flex font-light text-lg  text-md opacity-60  text-right">
                   <FaRegClipboard color="#FFA000" className="mt-1 ml-2" />

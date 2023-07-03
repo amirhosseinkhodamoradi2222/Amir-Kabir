@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {Link} from 'react-router-dom'
+import { BsMinecartLoaded } from "react-icons/bs";
 
 export default function Navbars() {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,8 +33,11 @@ export default function Navbars() {
               <Link to="/store" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm no-underline font-medium">فروشگاه</Link>
               <Link to="/blog" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm no-underline font-medium">وبلاگ</Link>
               <Link to="/aboute" className="text-white px-3 py-2 rounded-md text-sm font-medium no-underline">درباره ما</Link>
-              <Link to="/contuct" className="text-orange-500 hover:text-white px-3 py-2 rounded-md text-sm no-underline font-medium">ارسال درخواست</Link>
-              <Link to="/login" className="text-white bg-oreng hover:text-white px-3 ml-1 rounded-sm text-sm no-underline font-light">ورود</Link>
+              <Link to="/cardshop" className="text-white hover:text-white px-3 py-2 rounded-md text-sm no-underline font-medium">
+                <BsMinecartLoaded size={20} />  
+              </Link>
+              <Link to="/contuct" className="text-orange-500 hover:text-white px-3 py-2 rounded-md text-sm no-underline font-medium">درخواست</Link>
+              <Link to="/admin" className="text-white bg-oreng hover:text-white px-3 ml-1 rounded-sm text-sm no-underline font-light">ورود</Link>
               <span className="text-white">/</span>
               <Link to="/register" className="text-gray-300 px-1 hover:text-white rounded-md text-sm no-underline font-bold">ثبت نام</Link>
             </div>

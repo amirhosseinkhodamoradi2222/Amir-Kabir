@@ -1,5 +1,6 @@
 import React from "react";
+import { createContext } from "react";
 
-export default function context() {
-  return <></>;
-}
+const context = createContext([])
+
+export default context

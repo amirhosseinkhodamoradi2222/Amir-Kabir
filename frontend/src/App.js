@@ -11,6 +11,7 @@ import Cardshop from "./page/Cardshop/Cardshop";
 import Register from "./page/Register/Register";
 import Notfound from "./Notfound";
 import "../node_modules/react-dropzone-uploader/dist/styles.css";
+import context from "./Context/context/context";
 
 //Authentication
 import Authentication from "../src/Authentication/Authentication";
@@ -29,43 +30,45 @@ import Admin from "./page/Admin/Admin";
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/blog/:id" element={<Blog_detale />} />
-          <Route path="/store/:id" element={<Store_detale />} />
-          <Route path="/aboute" element={<Aboute />} />
-          <Route path="/contuct" element={<Contuct />} />
-          <Route path="/cardshop" element={<Cardshop />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/store" element={<Store />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/commint_dashbord" element={<Commint_dashbord />} />
-          <Route path="/blog_dashbord" element={<Blog_dashbord />} />
-          <Route path="/settings_dashbord" element={<Settings_dashbord />} />
-          <Route
-            path="/listproduct_dashbord"
-            element={<ListProduct_dashbord />}
-          />
-          <Route path="/product_dashbord" element={<Product_dashbord />} />
-          <Route path="/addblog_dashbord" element={<AddBlog_dashbord />} />
-          <Route
-            path="/addproduct_dashbord"
-            element={<AddProduct_dashbord />}
-          />
-          <Route
-            path="/editeblog_dashbord/:id"
-            element={<EditeBlog_dashbord />}
-          />
-          <Route
-            path="/editeproduct_dashbord/:id"
-            element={<EditeProduct_dashbord />}
-          />
-          <Route path="*" element={<Notfound />} />
-        </Routes>
-      </BrowserRouter>
+      <context.Provider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/blog/:id" element={<Blog_detale />} />
+            <Route path="/store/:id" element={<Store_detale />} />
+            <Route path="/aboute" element={<Aboute />} />
+            <Route path="/contuct" element={<Contuct />} />
+            <Route path="/cardshop" element={<Cardshop />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/store" element={<Store />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/commint_dashbord" element={<Commint_dashbord />} />
+            <Route path="/blog_dashbord" element={<Blog_dashbord />} />
+            <Route path="/settings_dashbord" element={<Settings_dashbord />} />
+            <Route
+              path="/listproduct_dashbord"
+              element={<ListProduct_dashbord />}
+            />
+            <Route path="/product_dashbord" element={<Product_dashbord />} />
+            <Route path="/addblog_dashbord" element={<AddBlog_dashbord />} />
+            <Route
+              path="/addproduct_dashbord"
+              element={<AddProduct_dashbord />}
+            />
+            <Route
+              path="/editeblog_dashbord/:id"
+              element={<EditeBlog_dashbord />}
+            />
+            <Route
+              path="/editeproduct_dashbord/:id"
+              element={<EditeProduct_dashbord />}
+            />
+            <Route path="*" element={<Notfound />} />
+          </Routes>
+        </BrowserRouter>
+      </context.Provider>
     </>
   );
 }
